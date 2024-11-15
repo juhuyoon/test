@@ -3,8 +3,8 @@ import db from './config/connection.js';
 import dotenv from 'dotenv';
 import openLibraryRoutes from './routes/api/openLibraryRoutes.js';
 import path from 'node:path';
-// import { fileURLToPath } from 'node:url';
-// const __dirname = fileURLToPath(import.meta.url);
+import { fileURLToPath } from 'node:url';
+const __dirname = fileURLToPath(import.meta.url);
 
 // Import the ApolloServer class
 import { ApolloServer } from '@apollo/server';
@@ -37,10 +37,12 @@ const startApolloServer = async () => {
 
   app.use('/graphql', expressMiddleware(server));
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../../client/dist')));
+    app.use(express.static(path.join(__dirname, '/client/dist')));
+    console.log(__dirname + "/client");
+    // app.use(express.static(path.join(new)))
 
     app.get('*', (_req, res) => {
-      res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+      res.sendFile(path.join(__dirname, '../../../client/dist/index.html'));
     });
   }
   // console.log(__dirname);
