@@ -1,3 +1,4 @@
-import User from "../models/User.js";
+import User from './User.js';
+import Book from './Book.js';
 
-export { User };
+export { User, Book };
